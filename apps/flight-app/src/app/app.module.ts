@@ -14,6 +14,11 @@ import { HomeComponent } from "./home/home.component";
 import { NavbarComponent } from "./navbar/navbar.component";
 import { SharedModule } from "./shared/shared.module";
 import { SidebarComponent } from "./sidebar/sidebar.component";
+import { LoggerModule, LoggerConfig } from '@flight-workspace/logger-lib';
+
+const loggerConfig: LoggerConfig = {
+  enableDebug: true
+}
 
 @NgModule({
   imports: [
@@ -27,6 +32,8 @@ import { SidebarComponent } from "./sidebar/sidebar.component";
     FlightLibModule.forRoot(),
     SharedModule.forRoot(),
     RouterModule.forRoot(APP_ROUTES),
+
+    LoggerModule.forRoot(loggerConfig)
   ],
   declarations: [
     AppComponent,
