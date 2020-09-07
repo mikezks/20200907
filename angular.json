@@ -760,6 +760,53 @@
           "style": "scss"
         }
       }
+    },
+    "luggage-feature-report-loss": {
+      "projectType": "library",
+      "root": "libs/luggage/feature-report-loss",
+      "sourceRoot": "libs/luggage/feature-report-loss/src",
+      "prefix": "luggage",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/luggage/feature-report-loss/tsconfig.lib.json",
+            "project": "libs/luggage/feature-report-loss/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/luggage/feature-report-loss/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/luggage/feature-report-loss/tsconfig.lib.json",
+              "libs/luggage/feature-report-loss/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/luggage/feature-report-loss/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/luggage/feature-report-loss/jest.config.js",
+            "tsConfig": "libs/luggage/feature-report-loss/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/luggage/feature-report-loss/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "cli": {
