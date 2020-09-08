@@ -1,10 +1,17 @@
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 
-import {Observable, of, ConnectableObservable} from 'rxjs';
+import {Observable, of, ConnectableObservable, BehaviorSubject} from 'rxjs';
 import {Flight} from '../models/flight';
-import { shareReplay, publish } from 'rxjs/operators';
+import { shareReplay, publish, tap } from 'rxjs/operators';
 
+export interface FlightState {
+  flights: Flight[];
+}
+
+export const initialFlightState: FlightState = {
+  flights: []
+}
 
 @Injectable()
 export class FlightService {
@@ -12,6 +19,7 @@ export class FlightService {
   flights: Flight[] = [];
   baseUrl = `http://www.angular.at/api`;
   reqDelay = 1000;
+  flightState$ = new BehaviorSubject<FlightState>(initialFlightState);
 
   constructor(private http: HttpClient) {
   }
@@ -46,7 +54,9 @@ export class FlightService {
       .set('Accept', 'application/json');
 
     const reqObj = {params, headers};
-    return this.http.get<Flight[]>(url, reqObj);
+    return this.http.get<Flight[]>(url, reqObj).pipe(
+      tap(flights => this.flightState$.next({ flights }))
+    );
     // return of(flights).pipe(delay(this.reqDelay))
 
   }

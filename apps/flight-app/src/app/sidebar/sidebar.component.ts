@@ -1,4 +1,7 @@
 import {Component} from '@angular/core';
+import { FlightService, FlightState } from '@flight-workspace/flight-lib';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 
 @Component({
@@ -7,4 +10,12 @@ import {Component} from '@angular/core';
 })
 
 export class SidebarComponent {
+  numFlights$: Observable<number>;
+
+  constructor(private flightService: FlightService) {
+    this.numFlights$ =
+      flightService.flightState$.pipe(
+        map((flightState: FlightState) => flightState.flights.length)
+      );
+  }
 }
