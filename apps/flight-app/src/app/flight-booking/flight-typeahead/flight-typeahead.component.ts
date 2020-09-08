@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { timer, Observable, Subscription } from 'rxjs';
-import { tap, debounceTime, switchMap } from 'rxjs/operators';
+import { timer, Observable, Subscription, of, combineLatest } from 'rxjs';
+import { tap, debounceTime, switchMap, map, filter, distinctUntilChanged } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 import { Flight } from '@flight-workspace/flight-lib';
 import { HttpParams, HttpHeaders, HttpClient } from '@angular/common/http';
@@ -25,9 +25,14 @@ export class FlightTypeaheadComponent implements OnInit, OnDestroy {
 
     this.flights$ =
       this.control.valueChanges.pipe(
+          (filterValue) => combineLatest([filterValue, of(1)]),
+          tap(([_, counter]) => console.log(counter)),
+          map(([from, _]) => from),
           debounceTime(300),
+          filter((filterValue: string) => filterValue.length > 2),
+          distinctUntilChanged(),
           tap(_ => this.loading = true),
-          switchMap(filter => this.load(filter)),
+          switchMap(filterValue => this.load(filterValue)),
           tap(_ => this.loading = false),
         );
   }
