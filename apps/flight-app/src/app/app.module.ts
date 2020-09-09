@@ -22,6 +22,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { StoreRouterConnectingModule, RouterState } from '@ngrx/router-store';
 import { GraphQLModule } from './graphql.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const loggerConfig: LoggerConfig = {
   enableDebug: true
@@ -35,6 +36,8 @@ const loggerConfig: LoggerConfig = {
 
     BrowserAnimationsModule,
     FlightCancellingModule,
+
+    ReactiveFormsModule,
 
     FlightLibModule.forRoot(),
     SharedModule.forRoot(),

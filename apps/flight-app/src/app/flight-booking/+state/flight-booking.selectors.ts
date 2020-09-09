@@ -10,5 +10,5 @@ export const selectFlights = createSelector(
   selectFlightBookingState,
   /* selectFlightIdFromRouter, */
   // Projector
-  (flightBookingState, id) => flightBookingState.flights/* .find(f => f.id === id) */
+  (flightBookingState/* , id */) => flightBookingState.flights/* .find(f => f.id === id) */
 );
