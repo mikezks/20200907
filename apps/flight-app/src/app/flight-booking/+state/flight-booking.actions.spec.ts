@@ -1,7 +1,7 @@
 import * as fromFlightBooking from './flight-booking.actions';
 
-describe('loadFlightBookings', () => {
+describe('FlightBookings', () => {
   it('should return an action', () => {
-    expect(fromFlightBooking.loadFlightBookings().type).toBe('[FlightBooking] Load FlightBookings');
+    expect(fromFlightBooking.flightsLoad({ from: '', to: ''}).type).toBe('[FlightBooking] Flights load');
   });
 });

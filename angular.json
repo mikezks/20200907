@@ -87,7 +87,9 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "apps/flight-app/jest.config.js",
-            "passWithNoTests": true
+            "tsConfig": "apps/flight-app/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "apps/flight-app/src/test-setup.ts"
           }
         }
       }
