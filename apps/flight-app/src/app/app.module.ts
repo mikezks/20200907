@@ -20,6 +20,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { reducers, metaReducers } from './+state';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { StoreRouterConnectingModule, RouterState } from '@ngrx/router-store';
 
 const loggerConfig: LoggerConfig = {
   enableDebug: true
@@ -42,6 +43,7 @@ const loggerConfig: LoggerConfig = {
 
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot([]),
+    StoreRouterConnectingModule.forRoot({stateKey: 'router', routerState: RouterState.Minimal }),
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   declarations: [
