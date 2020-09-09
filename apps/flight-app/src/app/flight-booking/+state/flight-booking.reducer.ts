@@ -1,6 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import * as FlightBookingActions from './flight-booking.actions';
 import { Flight } from '@flight-workspace/flight-lib';
+import produce from 'immer';
 
 export const flightBookingFeatureKey = 'flightBooking';
 
@@ -29,3 +30,18 @@ export const reducer = createReducer(
   }),
 
 );
+
+/**
+ * Immer.js immutable updates
+ */
+
+const data = [
+  {
+    id: 1,
+    value: 'mein test'
+  }
+];
+
+const myUpdate = produce(data, draftState => {
+  draftState[0].id = 5;
+});
