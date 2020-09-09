@@ -3,6 +3,7 @@ import {FlightService, Flight} from '@flight-workspace/flight-lib';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import * as fromFlightBooking from '../+state';
+import { take } from 'rxjs/operators';
 
 
 @Component({
@@ -52,7 +53,19 @@ export class FlightSearchComponent implements OnInit {
   }
 
   delay(): void {
-    this.flightService.delay();
+    // this.flightService.delay();
+
+    this.flights$.pipe(take(1))
+      .subscribe(flights => {
+        const flight = flights[0];
+        const oldDate = new Date(flight.date);
+        const newDate = new Date(oldDate.getTime() + 1000 * 60 * 15).toISOString();
+        const newFlight = { ...flight, date: newDate };
+
+        this.store.dispatch(
+          fromFlightBooking.flightUpdate({ flight: newFlight })
+        );
+      });
   }
 
 }
