@@ -56,6 +56,9 @@
     },
     "luggage-feature-report-loss": {
       "tags": ["domain:luggage", "type:feature"]
+    },
+    "graphql": {
+      "tags": []
     }
   },
   "tasksRunnerOptions": {

@@ -58,7 +58,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "flight-app:build"
+            "browserTarget": "flight-app:build",
+            "proxyConfig": "apps/flight-app/proxy.conf.json"
           },
           "configurations": {
             "production": {
@@ -805,6 +806,62 @@
       "schematics": {
         "@nrwl/angular:component": {
           "style": "scss"
+        }
+      }
+    },
+    "graphql": {
+      "root": "apps/graphql",
+      "sourceRoot": "apps/graphql/src",
+      "projectType": "application",
+      "prefix": "graphql",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/graphql",
+            "main": "apps/graphql/src/main.ts",
+            "tsConfig": "apps/graphql/tsconfig.app.json",
+            "assets": ["apps/graphql/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/graphql/src/environments/environment.ts",
+                  "with": "apps/graphql/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "graphql:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "apps/graphql/tsconfig.app.json",
+              "apps/graphql/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/graphql/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/graphql/jest.config.js",
+            "tsConfig": "apps/graphql/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
         }
       }
     }

@@ -1,4 +1,6 @@
 import {Component} from '@angular/core';
+import { Apollo } from "apollo-angular";
+import gql from "graphql-tag";
 
 @Component({
   selector: 'flight-app',
@@ -6,7 +8,6 @@ import {Component} from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor() { 
-  }
+
 }
 

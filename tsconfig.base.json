@@ -10,8 +10,14 @@
     "importHelpers": true,
     "target": "es5",
     "module": "esnext",
-    "typeRoots": ["node_modules/@types"],
-    "lib": ["es2017", "dom"],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2017",
+      "dom",
+      "esnext.asynciterable"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
@@ -26,7 +32,11 @@
       "@flight-workspace/luggage/feature-report-loss": [
         "libs/luggage/feature-report-loss/src/index.ts"
       ]
-    }
+    },
+    "allowSyntheticDefaultImports": true
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }

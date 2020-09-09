@@ -1,0 +1,12 @@
+<div class="card">
+  <div class="header">
+    <h1 class="title">GraphQL</h1>
+  </div>
+  <div class="content">
+    <button (click)="getData()" class="btn btn-default">load Flights with Passengers</button>
+    <br><br>
+    <pre *ngIf="data">{{
+      data | json
+    }}</pre>
+  </div>
+</div>
